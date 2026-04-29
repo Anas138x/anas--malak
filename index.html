@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لـ ملاكي ❤️</title>
+
+<!-- Fullscreen feeling -->
+<meta name="theme-color" content="#ff4b5c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    background: linear-gradient(-45deg, #ff6a88, #ff99ac, #ff758c, #ff7eb3);
+    background-size: 400% 400%;
+    animation: bg 10s ease infinite;
+    overscroll-behavior: none;
+}
+
+@keyframes bg {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+.container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 15px;
+    z-index: 2;
+}
+
+h1 { font-size: 10vw; }
+
+.names {
+    font-size: 7vw;
+    margin-top: 15px;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 5.5vw;
+    line-height: 1.5;
+}
+
+/* ❤️ القلب (العداد) */
+.heart-counter {
+    position: relative;
+    font-size: 25vw;
+    margin: 40px auto;
+    padding: 20px;
+    animation: beat 1.2s infinite, glow 3s infinite;
+}
+
+.heart-counter::before {
+    content: "❤";
+    background: linear-gradient(45deg, #ff4b5c, #ff99ac, #ff6a88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#counterText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4vw;
+    color: white;
+    text-shadow: 0 0 15px black;
+    line-height: 1.4;
+    width: 80%;
+}
+
+/* نبض */
+@keyframes beat {
+    0% {transform: scale(1);}
+    40% {transform: scale(1.12);}
+    60% {transform: scale(0.95);}
+    100% {transform: scale(1);}
+}
+
+@keyframes glow {
+    0% {filter: drop-shadow(0 0 10px #ff4b5c);}
+    50% {filter: drop-shadow(0 0 25px #ff99ac);}
+    100% {filter: drop-shadow(0 0 10px #ff4b5c);}
+}
+
+/* ❤️ أزرار */
+@keyframes heartBeat {
+    0% { transform: rotate(-45deg) scale(1); }
+    25% { transform: rotate(-45deg) scale(1.1); }
+    40% { transform: rotate(-45deg) scale(0.95); }
+    60% { transform: rotate(-45deg) scale(1.15); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+.heart-btn {
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    background: #ff4b5c;
+    border: none;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    margin-top: 20px;
+    animation: heartBeat 1.2s infinite;
+}
+
+.heart-btn::before,
+.heart-btn::after {
+    content: "";
+    position: absolute;
+    width: 30vw;
+    height: 30vw;
+    background: #ff4b5c;
+    border-radius: 50%;
+}
+
+.heart-btn::before {
+    top: -15vw;
+    left: 0;
+}
+
+.heart-btn::after {
+    left: 15vw;
+    top: 0;
+}
+
+.heart-btn span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: white;
+    font-size: 5vw;
+    z-index: 2;
+}
+
+.heart-btn:active {
+    animation: heartBeat 0.4s infinite;
+}
+
+/* 💖 القلوب بالخلفية */
+.heart {
+    position: absolute;
+    color: red;
+    animation: float 5s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes float {
+    from {transform:translateY(100vh);}
+    to {transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>لـ ملاكي ❤️</h1>
+
+    <p style="font-size:6vw;">💍 24.04.2026 — 16:00</p>
+
+    <div class="names" id="typing"></div>
+
+    <div class="heart-counter">
+        <div id="counterText"></div>
+    </div>
+
+    <div class="message">
+        يمكن الكلام ما يوصف قديش بحبك...  
+        بس كل يوم معك أحلى من اللي قبله 💕  
+    </div>
+
+    <button class="heart-btn" onclick="openSong()">
+        <span>اكبسي هون</span>
+    </button>
+
+    <br>
+
+    <button class="heart-btn" onclick="showSecret()">
+        <span>اكبسي هون</span>
+    </button>
+
+    <div id="secretMessage"></div>
+</div>
+
+<script>
+// 🎵 الأغنية
+function openSong() {
+    window.open("https://youtu.be/y70feYy4MU0", "_blank");
+}
+
+// ✍️ كتابة الاسم
+let text = "Anas ❤️ Malak";
+let i = 0;
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 90);
+    }
+}
+typeWriter();
+
+// ⏳ عداد
+let startDate = new Date("2026-04-24T16:00:00");
+
+function updateCounter() {
+    let now = new Date();
+
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+
+    let hours = now.getHours() - startDate.getHours();
+    let minutes = now.getMinutes() - startDate.getMinutes();
+    let seconds = now.getSeconds() - startDate.getSeconds();
+
+    if (seconds < 0) { seconds += 60; minutes--; }
+    if (minutes < 0) { minutes += 60; hours--; }
+    if (hours < 0) { hours += 24; days--; }
+    if (days < 0) {
+        let prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+    }
+    if (months < 0) { months += 12; years--; }
+
+    document.getElementById("counterText").innerHTML =
+        `${years} سنة 💍<br>
+         ${months} شهر 🌙<br>
+         ${days} يوم ❤️<br>
+         ${hours} ساعة ⏳<br>
+         ${minutes} دقيقة 💕<br>
+         ${seconds} ثانية 💖`;
+}
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+// 💖 قلوب مع منطقة آمنة
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.className="heart";
+
+    let x = Math.random() * 100;
+
+    // منع المرور فوق العداد
+    if (x > 30 && x < 70) {
+        x = (Math.random() < 0.5) ? x - 30 : x + 30;
+    }
+
+    heart.style.left = x + "vw";
+
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+},500);
+
+// 🔒 مفاجأة
+let step = 0;
+function showSecret(){
+    let msg = document.getElementById("secretMessage");
+
+    if(step === 0){
+        msg.innerHTML = "أنتي لحلوه ♥️♥️";
+        msg.style.fontSize = "7vw";
+        step = 1;
+    } else {
+        msg.innerHTML = "أنتي حلوه مره ثانيه ♥️😊";
+        step = 0;
+    }
+}
+</script>
+
+</body>
+</html>
